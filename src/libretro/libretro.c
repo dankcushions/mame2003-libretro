@@ -55,7 +55,7 @@ void retro_set_environment(retro_environment_t cb)
       { "mame2003-cheats", "Cheats; disabled|enabled" },
       { "mame2003-vector_antialising", "Vector antialiasing; enabled|disabled" },
       { "mame2003-vector_intensity", "Vector intensity; 0.5|0.6|0.7|0.8|0.9|1|1.1|1.2|1.3|1.4|1.5|1.6|1.7|1.8|1.9|2|2.1|2.2|2.3|2.4|2.5|2.6|2.7|2.8|2.9|3" },
-      { "mame2003-vector_beam", "Vector beam width; 1.5|1.6|1.7|1.8|1.9|2|2.5|3|3.5|4|4.5|5|6|7|8|9|10|11|12|13|14|15|16|1|1.1|1.2|1.3|1.4" },
+      { "mame2003-vector_beam", "Vector beam width; 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" },
       { "mame2003-vector_flicker", "Vector flicker; 0|5|10|15|20|25|30|35|40|45|50|60|70|80|90|100" },
       { "mame2003-vector_translucency", "Vector translucency; enabled|disabled" },
       { NULL, NULL },
@@ -446,7 +446,7 @@ bool retro_load_game(const struct retro_game_info *game)
         options.ui_orientation = uiModes[rotateMode];
         options.vector_intensity = vector_intensity;
         options.vector_antialising = vector_antialising;
-        options.vector_beam = vector_beam;
+        options.beam = vector_beam;
         options.vector_flicker = vector_flicker;
         options.vector_translucency = vector_translucency;
         options.skip_disclaimer = skip_disclaimer;
