@@ -442,6 +442,14 @@ void retro_run (void)
       retroJsState[14 + offset] = input_cb(i, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L3);
       retroJsState[15 + offset] = input_cb(i, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R3);
       
+      /* some temperory logging to see what aimtrak lightguns are outputting */
+      printf("RETRO_DEVICE_MOUSE_X = %d, RETRO_DEVICE_MOUSE_Y = %d\n",              input_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X),
+                                                                                    input_cb(0, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y));
+      printf("RETRO_DEVICE_POINTER_X = %d, RETRO_DEVICE_POINTER_X = %d\n",          input_cb(0, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_POINTER_X),
+                                                                                    input_cb(0, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_POINTER_Y));
+      printf("RETRO_DEVICE_ID_LIGHTGUN_X = %d, RETRO_DEVICE_ID_LIGHTGUN_Y = %d\n",  input_cb(0, RETRO_DEVICE_ID_LIGHTGUN, 0, RETRO_DEVICE_ID_LIGHTGUN_X),
+                                                                                    input_cb(0, RETRO_DEVICE_ID_LIGHTGUN, 0, RETRO_DEVICE_ID_LIGHTGUN_Y));
+
       /* Mouse
        * Currently libretro only supports 1 mouse, so port is hard-coded.
        * MAME seems to support 4 mice/trackballs, so could be changed
