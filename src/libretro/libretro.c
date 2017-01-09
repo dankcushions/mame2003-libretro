@@ -500,6 +500,7 @@ bool retro_load_game(const struct retro_game_info *game)
     if(driverIndex)
     {
         fallbackDir = strdup(game->path);
+        printf("fallbackDir = %s\n",fallbackDir);
         int orientation;
         unsigned rotateMode;
         static const int uiModes[] = {ROT0, ROT90, ROT180, ROT270};
@@ -524,7 +525,9 @@ bool retro_load_game(const struct retro_game_info *game)
 
         // Get ROM directory
         romDir = normalizePath(fallbackDir);
+        printf("romDir1 = %s\n",romDir);
         romDir = peelPathItem(romDir);
+        printf("romDir2 = %s\n",romDir);
 
         // Setup Rotation
         orientation = drivers[driverIndex]->flags & ORIENTATION_MASK;
