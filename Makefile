@@ -8,6 +8,10 @@ ifneq ($(GIT_VERSION)," unknown")
 	CFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
 endif
 
+ifeq (,$(ARCH))
+   ARCH = $(shell uname -m)
+endif
+
 ifeq ($(platform),)
 platform = unix
 ifeq ($(shell uname -a),)
@@ -269,16 +273,16 @@ PLATCFLAGS += $(fpic)
 CFLAGS += -D__LIBRETRO__ -DPI=3.1415927
 LDFLAGS += $(LIBM)
 
-# uncomment next line to use Assembler 68000 engine
-# X86_ASM_68000 = 1
+ifeq ($(ARCH), $(filter $(ARCH), i386 i686))
+	# Assembler 68000 engine
+	X86_ASM_68000 = 1
 
-# uncomment next line to use Assembler 68020 engine
-# X86_ASM_68020 = 1
+	# Assembler 68020 engine
+	X86_ASM_68020 = 1
 
-# uncomment next line to use DRC MIPS3 engine
-X86_MIPS3_DRC = 1
-
-
+	# DRC MIPS3 engine
+	X86_MIPS3_DRC = 1
+endif
 
 # build the targets in different object dirs, since mess changes
 # some structures and thus they can't be linked against each other.
