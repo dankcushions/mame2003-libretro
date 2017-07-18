@@ -273,16 +273,18 @@ PLATCFLAGS += $(fpic)
 CFLAGS += -D__LIBRETRO__ -DPI=3.1415927
 LDFLAGS += $(LIBM)
 
-ifeq ($(ARCH), $(filter $(ARCH), i386 i686))
-	# Assembler 68000 engine
-	X86_ASM_68000 = 1
-
-	# Assembler 68020 engine
-	X86_ASM_68020 = 1
-
+ifneq ($(findstring x86_64,$(ARCH)),)
+	# catch "x86_64" first, but no commands for x86_x64 only at this point
+else ifneq ($(findstring 86,$(ARCH)),)
 	# DRC MIPS3 engine
 	X86_MIPS3_DRC = 1
 endif
+
+# Assembler 68000 engine
+X86_ASM_68000 = 0
+
+# Assembler 68020 engine
+X86_ASM_68020 = 0
 
 # build the targets in different object dirs, since mess changes
 # some structures and thus they can't be linked against each other.
