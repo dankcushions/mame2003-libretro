@@ -280,7 +280,7 @@ LDFLAGS += $(LIBM)
 # X86_ASM_68020 = 1
 
 ifneq ($(findstring x86_64,$(ARCH)),)
-	# catch "x86_64" first, but no commands for x86_x64 only at this point
+	# DRC MIPS3 engine does not work in 64-bit
 else ifneq ($(findstring 86,$(ARCH)),)
 	# DRC MIPS3 engine
 	X86_MIPS3_DRC = 1
