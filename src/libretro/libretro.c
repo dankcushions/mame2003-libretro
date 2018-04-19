@@ -38,6 +38,7 @@ char *saveDir;
 int16_t XsoundBuffer[2048];
 
 int sample_rate;
+int audio_seg_length;
 extern int frameskip;
 unsigned skip_disclaimer = 0;
 unsigned skip_warnings = 0;
@@ -244,6 +245,9 @@ static void update_variables(void)
       sample_rate = atoi(var.value);
    else
       sample_rate = 48000;
+
+   /* calculate audio segment length */
+   audio_seg_length = (sample_rate * 100 + Machine->drv->frames_per_second) / Machine->drv->frames_per_second;
    
    var.value = NULL;
    var.key = "mame2003-external_hiscore";
@@ -409,7 +413,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
    info->geometry.max_height = height;
    info->geometry.aspect_ratio = (rotated && !tate_mode) ? (float)videoConfig.aspect_y / (float)videoConfig.aspect_x : (float)videoConfig.aspect_x / (float)videoConfig.aspect_y;
    info->timing.fps = Machine->drv->frames_per_second;
-   info->timing.sample_rate = sample_rate;
+   info->timing.sample_rate = (Machine->drv->frames_per_second * audio_seg_length);
 }
 
 static void check_system_specs(void)
@@ -560,8 +564,7 @@ void retro_run (void)
 
    mame_frame();
 
-   audio_batch_cb(XsoundBuffer, Machine->sample_rate / Machine->drv->frames_per_second);
-
+   audio_batch_cb(XsoundBuffer, audio_seg_length);
 }
 
 
